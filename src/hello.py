@@ -24,22 +24,20 @@ def get_zp_data():
     return df_zp
 
 
-def setup_plot_style(plot, label):
+def setup_plot_style(plot):
     plot.tick_params(axis='x', rotation=70)
-    plot.set_title(label)
     plot.set_ylim(0, 175000)
 
 
 def display_plots(data):
     st.write(f"Зарплата по секторам:")
 
-    fig, axes = plt.subplots(figsize=(15, 10), ncols=2)
+    fig, axes = plt.subplots(figsize=(15, 10))
 
-    it_salary_bar = sns.barplot(data=data.iloc[0, 1:], ax=axes[0])
-    setup_plot_style(it_salary_bar, 'IT salary')
-
-    fin_salary_bar = sns.barplot(data=data.iloc[1, 1:], ax=axes[1])
-    setup_plot_style(fin_salary_bar, 'Finance salary')
+    fin_salary_bar = sns.barplot(data=data.iloc[1, 1:])
+    setup_plot_style(fin_salary_bar)
+    it_salary_bar = sns.barplot(data=data.iloc[0, 1:])
+    setup_plot_style(it_salary_bar)
 
     st.pyplot(fig)
 
